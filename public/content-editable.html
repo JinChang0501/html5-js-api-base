@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #info {
+        background-color: #00b7ff;
+      }
+      #info:focus {
+        background-color: #ffc44e;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" onchange="console.log(this.value)" />
+    <div id="info" contenteditable="true">111</div>
+    <script>
+      const info = document.querySelector("#info");
+      const v = localStorage.getItem("my-content");
+
+      if (v !== null) {
+        info.innerText = v;
+      }
+
+      info.addEventListener("input", (e) => {
+        console.log(info.innerText);
+        localStorage.setItem("my-content", info.innerText); 
+      });
+
+      
+    </script>
+  </body>
+</html>
