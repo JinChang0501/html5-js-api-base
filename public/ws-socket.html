@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const wsServer = new WebSocket("ws://192.168.36.55:3070");
+
+      const handler = (event) => {
+        console.log(event.type, event);
+        if (event.data) console.log(event.data);
+      };
+
+      socket.addEventListener("open", handler);
+      socket.addEventListener("message", handler);
+      socket.addEventListener("close", handler);
+    </script>
+  </body>
+</html>

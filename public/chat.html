@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="myInput" /><button onclick="sendData()">送出</button
+    ><br />
+    <textarea id="panel" cols="50" rows="20" readonly></textarea>
+
+    <script>
+      const myInput = document.getElementById("myInput");
+      const panel = document.getElementById("panel");
+
+      myInput.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13) {
+          sendData();
+        }
+        console.log(e.keyCode);
+      });
+
+      const sendData = () => {
+        socket.send(myInput.value);
+        myInput.value = "";
+      };
+
+      const socket = new WebSocket("ws://192.168.36.56:3071");
+
+      socket.addEventListener("open", (e) => {
+        // 有連線才會輸入資料
+        myInput.removeAttribute("disabled");
+      });
+      socket.addEventListener("message", (e) => {
+        panel.value += e.data + "\n";
+      });
+      socket.addEventListener("close", (e) => {});
+    </script>
+  </body>
+</html>
